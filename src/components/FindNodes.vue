@@ -94,7 +94,6 @@ watch(methodText, (newContent)=>{
   <div v-if="leadingSpacesErrorMsg" class="error-style">
     {{ leadingSpacesErrorMsg }}
   </div>
-  <p>one more test for action</p>
 </template>
 
 <style scoped>
