@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 let methodText = ref(null);
 let highestCallerCount = ref(0);
 let emptyContentErrorMsg = ref(null)
@@ -70,6 +70,14 @@ function countLeadingSpaces(str) {
   }
   return count;
 }
+
+watch(methodText, (newContent)=>{
+  if(newContent?.trim() === ""){
+    highestCallerCount.value = 0
+    emptyContentErrorMsg.value = null
+    leadingSpacesErrorMsg.value = null 
+  }
+})
 </script>
 
 <template>
