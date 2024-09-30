@@ -4,7 +4,7 @@ import FindNodes from './components/FindNodes.vue'
 
 <template>
   <div>
-    <FindNodes msg="Please input the content below:" />
+    <FindNodes msg="Input content below:" />
   </div>
 </template>
 
