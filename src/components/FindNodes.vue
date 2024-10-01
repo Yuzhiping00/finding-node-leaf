@@ -82,7 +82,7 @@ watch(methodText, (newContent)=>{
 
 <template>
   <p>{{ msg }}</p>
-  <textarea v-model="methodText" placeholder="add multiple lines"></textarea>
+  <textarea v-model="methodText" placeholder="no space for the first line"></textarea>
   <br />
   <button class="button" @click="calculateNodeLeaf">Submit</button>
   <div class="margin-customized" v-if="highestCallerCount > 0">
