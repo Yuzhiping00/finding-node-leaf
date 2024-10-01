@@ -60,7 +60,6 @@ function countLeadingSpaces(str) {
 }
 
 watch(methodText, (newContent)=>{
-  console.log("new content = ", newContent)
   if(newContent?.trim() === ""){
     highestCallerCount.value = 0
     leadingSpacesErrorMsg.value = null 
@@ -68,14 +67,19 @@ watch(methodText, (newContent)=>{
   calculateNodeLeaf()
 })
 
-function copyNumberToClipboard() {
-  navigator.clipboard.writeText(highestCallerCount.value)
+async function copyNumberToClipboard() {
+  try{
+    await navigator.clipboard.writeText(highestCallerCount.value)
+    console.log("Text copied to clipboard successfully!")
+  }catch(err){
+    console.error('Failed to copy test: ', err)
+  }
 }
 </script>
 
 <template>
   <p>{{ msg }}</p>
-  <textarea v-model="methodText" placeholder="no space for the first line"></textarea>
+  <textarea v-model="methodText" placeholder="Place content here"></textarea>
   <br />
   <div class="margin-customized" v-if="highestCallerCount >= 0 && leadingSpacesErrorMsg === null">
     Number of node leaf: {{ highestCallerCount }}
