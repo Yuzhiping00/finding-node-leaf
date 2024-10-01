@@ -67,6 +67,10 @@ watch(methodText, (newContent)=>{
   }
   calculateNodeLeaf()
 })
+
+function copyNumberToClipboard() {
+  navigator.clipboard.writeText(highestCallerCount.value)
+}
 </script>
 
 <template>
@@ -75,6 +79,7 @@ watch(methodText, (newContent)=>{
   <br />
   <div class="margin-customized" v-if="highestCallerCount >= 0 && leadingSpacesErrorMsg === null">
     Number of node leaf: {{ highestCallerCount }}
+    <button @click="copyNumberToClipboard" v-if="highestCallerCount > 0 && leadingSpacesErrorMsg === null" >Copy</button>
   </div>
   <div v-if="leadingSpacesErrorMsg" class="error-style">
     {{ leadingSpacesErrorMsg }}
@@ -92,15 +97,16 @@ textarea {
   height: 300px;
 }
 
-.button {
+button {
   border-radius: 8px;
   color: rgba(243, 8, 133, 0.931);
-  padding: 12px 24px;
+  padding: 10px 14px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 18px;
   background-color: rgb(227, 225, 222);
+  margin-left: 59%;
 }
 
 .margin-customized {
