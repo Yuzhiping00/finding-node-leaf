@@ -100,7 +100,6 @@ textarea {
   width: 80%;
   height: 300px;
 }
-
 button {
   border-radius: 8px;
   color: rgba(243, 8, 133, 0.931);
@@ -109,8 +108,13 @@ button {
   text-decoration: none;
   display: inline-block;
   font-size: 18px;
-  background-color: rgb(227, 225, 222);
   margin-left: 59%;
+}
+
+button:hover{
+  background-color: rgba(66, 5, 249, 0.931);
+  color:rgb(239, 67, 67);
+  cursor: pointer;
 }
 
 .margin-customized {
