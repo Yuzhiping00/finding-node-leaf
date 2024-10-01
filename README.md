@@ -1,6 +1,6 @@
 # finding-node-leaf
 
-This template should help get you started developing with Vue 3 in Vite.
+The purpose of this tool is to find total number of leaf nodes at a surface level from the text output of IntelliJ Call Hierarchy
 
 ## Recommended IDE Setup
 
