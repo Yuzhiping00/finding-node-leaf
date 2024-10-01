@@ -2,7 +2,6 @@
 import { ref, watch } from "vue";
 let methodText = ref(null);
 let highestCallerCount = ref(0);
-let emptyContentErrorMsg = ref(null)
 let leadingSpacesErrorMsg = ref(null)
 
 defineProps({
@@ -16,16 +15,6 @@ function calculateNodeLeaf() {
   // Split the input text into an array of lines
   let allMethods = [];
 
-  // without content input
-  if (methodText.value === null || methodText.value.trim() === '') {
-    emptyContentErrorMsg.value = 'Please enter content to count node leaf.'
-    leadingSpacesErrorMsg.value = null
-    highestCallerCount.value = 0
-    return 0
-  }
-
-  // with content input
-  emptyContentErrorMsg.value = null
   // separated string into lines of content and remove the empty lines
   const methodLines = methodText.value.split(/\r?\n/).filter(line => line.trim() !== '')
   for (let i = 0; i < methodLines.length; i++) {
@@ -42,7 +31,7 @@ function calculateNodeLeaf() {
     } else {
       let leadingSpacesCount_origin = countLeadingSpaces(methodLines[i])
       let leadingSpacesCount_latter = countLeadingSpaces(methodLines[i + 1])
-      if (leadingSpacesCount_origin === leadingSpacesCount_latter) { // orginal line has some empty spaces as latter line
+      if (leadingSpacesCount_origin === leadingSpacesCount_latter) {
         allMethods.push(methodLines[i])
         highestCallerCount.value = allMethods.length
       } else if (leadingSpacesCount_origin < leadingSpacesCount_latter) {
@@ -53,7 +42,6 @@ function calculateNodeLeaf() {
       }
     }
   }
-  return highestCallerCount.value
 }
 
 function countLeadingSpaces(str) {
@@ -72,11 +60,12 @@ function countLeadingSpaces(str) {
 }
 
 watch(methodText, (newContent)=>{
+  console.log("new content = ", newContent)
   if(newContent?.trim() === ""){
     highestCallerCount.value = 0
-    emptyContentErrorMsg.value = null
     leadingSpacesErrorMsg.value = null 
   }
+  calculateNodeLeaf()
 })
 </script>
 
@@ -84,12 +73,8 @@ watch(methodText, (newContent)=>{
   <p>{{ msg }}</p>
   <textarea v-model="methodText" placeholder="no space for the first line"></textarea>
   <br />
-  <button class="button" @click="calculateNodeLeaf">Submit</button>
-  <div class="margin-customized" v-if="highestCallerCount > 0">
+  <div class="margin-customized" v-if="highestCallerCount >= 0 && leadingSpacesErrorMsg === null">
     Number of node leaf: {{ highestCallerCount }}
-  </div>
-  <div v-if="emptyContentErrorMsg" class="error-style">
-    {{ emptyContentErrorMsg }}
   </div>
   <div v-if="leadingSpacesErrorMsg" class="error-style">
     {{ leadingSpacesErrorMsg }}
