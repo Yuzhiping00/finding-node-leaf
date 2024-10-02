@@ -82,7 +82,7 @@ async function copyNumberToClipboard() {
   <textarea v-model="methodText" placeholder="Place content here"></textarea>
   <br />
   <div class="margin-customized" v-if="highestCallerCount >= 0 && leadingSpacesErrorMsg === null">
-    Number of node leaf: {{ highestCallerCount }}
+    Number of node leaf: <span class="number-color">{{ highestCallerCount }}</span>
     <button @click="copyNumberToClipboard" v-if="highestCallerCount > 0 && leadingSpacesErrorMsg === null" >Copy</button>
   </div>
   <div v-if="leadingSpacesErrorMsg" class="error-style">
@@ -94,12 +94,14 @@ async function copyNumberToClipboard() {
 p {
   font-size: 24px;
   color: rgba(237, 186, 4, 0.931);
+  margin-bottom: 10px;
 }
 
 textarea {
-  width: 80%;
+  width: 84%;
   height: 300px;
 }
+
 button {
   border-radius: 8px;
   color: rgba(243, 8, 133, 0.931);
@@ -124,8 +126,15 @@ button:hover{
 }
 
 .error-style {
-  font-size: 16px;
+  font-size: 18px;
   margin-top: 10px;
   color: rgba(242, 85, 169, 0.931);
+}
+
+.number-color{
+  color: rgba(249, 4, 135, 0.931);
+  background-color: rgba(237, 234, 244, 0.931);
+  padding:6px 26px;
+  border-radius: 5px;
 }
 </style>
