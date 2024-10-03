@@ -6,13 +6,17 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "deploy":"gh-pages -d dist",
+    "deploy": "gh-pages -d dist",
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.4.29"
+    "@mdi/font": "^7.4.47",
+    "sass": "^1.79.4",
+    "vue": "^3.4.29",
+    "vuetify": "^3.7.2"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^6.6.0",
     "@vitejs/plugin-vue": "^5.0.5",
     "gh-pages": "^6.1.1",
     "vite": "^5.3.1",
