@@ -3,7 +3,7 @@ import { ref, watch } from "vue";
 let methodText = ref(null);
 let highestCallerCount = ref(0);
 let leadingSpacesErrorMsg = ref(null);
-let tooltipText = ref("Click to copy number")
+let tooltipText = ref("Click to copy number");
 
 defineProps({
   msg: {
@@ -15,6 +15,8 @@ defineProps({
 function calculateNodeLeaf() {
   // Split the input text into an array of lines
   let allMethods = [];
+  let noSpacesMethods = [];
+  let uniMethods = [];
 
   // separated string into lines of content and remove the empty lines
   const methodLines = methodText.value
@@ -30,19 +32,25 @@ function calculateNodeLeaf() {
     leadingSpacesErrorMsg.value = null;
     if (i === methodLines.length - 1) {
       allMethods.push(methodLines[i]);
-      highestCallerCount.value = allMethods.length;
+      noSpacesMethods = allMethods.map((a) => a.trim());
+      uniMethods = [...new Set(noSpacesMethods)];
+      highestCallerCount.value = uniMethods.length;
       break;
     } else {
       let leadingSpacesCount_origin = countLeadingSpaces(methodLines[i]);
       let leadingSpacesCount_latter = countLeadingSpaces(methodLines[i + 1]);
       if (leadingSpacesCount_origin === leadingSpacesCount_latter) {
         allMethods.push(methodLines[i]);
-        highestCallerCount.value = allMethods.length;
+        noSpacesMethods = allMethods.map((a) => a.trim());
+        uniMethods = [...new Set(noSpacesMethods)];
+        highestCallerCount.value = uniMethods.length;
       } else if (leadingSpacesCount_origin < leadingSpacesCount_latter) {
         continue;
       } else {
         allMethods.push(methodLines[i]);
-        highestCallerCount.value = allMethods.length;
+        noSpacesMethods = allMethods.map((a) => a.trim());
+        uniMethods = [...new Set(noSpacesMethods)];
+        highestCallerCount.value = uniMethods.length;
       }
     }
   }
@@ -74,16 +82,15 @@ watch(methodText, (newContent) => {
 async function copyNumberToClipboard() {
   try {
     await navigator.clipboard.writeText(highestCallerCount.value);
-    tooltipText.value="Copied"
+    tooltipText.value = "Copied";
     //reset tooltip text after a shor delay(such as 2 seconds)
-    setTimeout(() =>{
-     tooltipText.value = "Click to copy number"
-    }, 5000)
+    setTimeout(() => {
+      tooltipText.value = "Click to copy number";
+    }, 5000);
   } catch (err) {
     console.error("Failed to copy test: ", err);
   }
 }
-
 </script>
 
 <template>
@@ -119,11 +126,13 @@ async function copyNumberToClipboard() {
       <v-tooltip :text="tooltipText">
         <template v-slot:activator="{ props }">
           <v-btn
-            v-bind="props"  prepend-icon="mdi-content-copy" color="secondary"
-            @click="copyNumberToClipboard" text="Copy"
+            v-bind="props"
+            prepend-icon="mdi-content-copy"
+            color="secondary"
+            @click="copyNumberToClipboard"
+            text="Copy"
             v-if="highestCallerCount > 0 && leadingSpacesErrorMsg === null"
-            ></v-btn
-          >
+          ></v-btn>
         </template>
       </v-tooltip>
     </div>
