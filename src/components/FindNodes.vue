@@ -58,8 +58,9 @@ function calculateNodeLeaf() {
       }
     }
   }
-
   console.log("methods: ", uniMethods);
+  return highestCallerCount.value
+ 
 }
 
 function countLeadingSpaces(str) {
