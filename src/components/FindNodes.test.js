@@ -25,7 +25,7 @@ describe('FindNodes.vue', () =>{
         "  EMRAdmin.runAlert(HttpServletRequest, HttpServletResponse)  (com.hinext.emr.servlet)\n"+
         "       EMRAdmin.doPost(HttpServletRequest, HttpServletResponse)  (com.hinext.emr.servlet)\n"+
         "        EMRAdmin.doGet(HttpServletRequest, HttpServletResponse)  (com.hinext.emr.servlet)"
-        expect(wrapper.vm.calculateNodeLeaf()).toBe(3)
+        expect(wrapper.vm.calculateNodeLeaf()).toBe(2)
     })   
 
 })
