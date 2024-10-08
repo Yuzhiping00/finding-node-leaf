@@ -1,14 +1,16 @@
-import { shallowMount } from "@vue/test-utils";
-import { describe, it, expect, beforeEach } from "vitest";
-import FindNodes from "./FindNodes.vue";
+import { mount } from "@vue/test-utils";
+import { describe, it, expect } from "vitest";
+import FindNodes from "@/components/FindNodes.vue";
+import fs from 'fs'
+import path from 'path'
 
-describe('FindNodes.vue', () =>{
+const fileContent = fs.readFileSync(path.resolve(__dirname, '../assets/data.txt'), 'utf8')
 
-    let wrapper;
+let wrapper;
 
-    beforeEach(() =>{
-        wrapper = shallowMount(FindNodes)
-    })
+wrapper = mount(FindNodes)
+
+describe('Hardcoded Input Methods', () =>{
 
     it('generate error message when the first line contains leading spaces', () =>{
         wrapper.vm.methodText = "    This is no leading space string"
@@ -28,6 +30,23 @@ describe('FindNodes.vue', () =>{
         expect(wrapper.vm.calculateNodeLeaf()).toBe(2)
     })   
 
+})
+
+describe("Import Text File Including Methods", () =>{
+    it("Calculate Node Correctly Example", () =>{
+        wrapper.vm.highestCallerCount = 0
+        wrapper.vm.methodText = fileContent
+        expect(typeof(fileContent)).toBe('string')
+        expect(wrapper.vm.calculateNodeLeaf()).toBe(3)
+        expect(wrapper.vm.leadingSpacesErrorMsg).toBe(null)
+    })
+
+    // it("Calculate Nodes Incorrectly Example", () =>{
+    //     wrapper.vm.highestCallerCount = 0
+    //     wrapper.vm.methodText = fileContent
+    //     expect(typeof(fileContent)).toBe('string')
+    //     expect(wrapper.vm.calculateNodeLeaf()).toBe(3)
+    // })
 })
 
 

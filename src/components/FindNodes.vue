@@ -64,7 +64,6 @@ function calculateNodeLeaf() {
       }
     }
   }
-  console.log("methods: ", uniMethods);
   return highestCallerCount.value;
 }
 

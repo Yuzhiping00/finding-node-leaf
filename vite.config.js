@@ -9,7 +9,9 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   test:{
     exclude: ["node_modules"],
-    environment: 'jsdom'
+    environment: 'jsdom',
+    globals: true,
+    silent : true,
   },
   base:"/finding-node-leaf/",
   plugins: [
