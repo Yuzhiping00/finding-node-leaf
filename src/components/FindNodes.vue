@@ -14,9 +14,9 @@ defineProps({
 
 function calculateNodeLeaf() {
   // Split the input text into an array of lines
-  let allMethods = []
-  let noSpacesMethods = []
-  let keepFirstBracketMethods = []
+  let allMethods = [];
+  let noSpacesMethods = [];
+  let keepFirstBracketMethods = [];
   let uniMethods = [];
 
   // separated string into lines of content and remove the empty lines
@@ -34,7 +34,9 @@ function calculateNodeLeaf() {
     if (i === methodLines.length - 1) {
       allMethods.push(methodLines[i]);
       noSpacesMethods = allMethods.map((a) => a.trim());
-      keepFirstBracketMethods = noSpacesMethods.map((m) => m.substr(0, m.indexOf(")")+1));
+      keepFirstBracketMethods = noSpacesMethods.map((m) =>
+        m.substr(0, m.indexOf(")") + 1)
+      );
       uniMethods = [...new Set(keepFirstBracketMethods)];
       highestCallerCount.value = uniMethods.length;
       break;
@@ -44,7 +46,9 @@ function calculateNodeLeaf() {
       if (leadingSpacesCount_origin === leadingSpacesCount_latter) {
         allMethods.push(methodLines[i]);
         noSpacesMethods = allMethods.map((a) => a.trim());
-        keepFirstBracketMethods = noSpacesMethods.map((m) => m.substr(0, m.indexOf(")")+1));
+        keepFirstBracketMethods = noSpacesMethods.map((m) =>
+          m.substr(0, m.indexOf(")") + 1)
+        );
         uniMethods = [...new Set(keepFirstBracketMethods)];
         highestCallerCount.value = uniMethods.length;
       } else if (leadingSpacesCount_origin < leadingSpacesCount_latter) {
@@ -52,15 +56,16 @@ function calculateNodeLeaf() {
       } else {
         allMethods.push(methodLines[i]);
         noSpacesMethods = allMethods.map((a) => a.trim());
-        keepFirstBracketMethods = noSpacesMethods.map((m) => m.substr(0, m.indexOf(")"+1)));
+        keepFirstBracketMethods = noSpacesMethods.map((m) =>
+          m.substr(0, m.indexOf(")" + 1))
+        );
         uniMethods = [...new Set(keepFirstBracketMethods)];
         highestCallerCount.value = uniMethods.length;
       }
     }
   }
   console.log("methods: ", uniMethods);
-  return highestCallerCount.value
- 
+  return highestCallerCount.value;
 }
 
 function countLeadingSpaces(str) {
@@ -102,15 +107,20 @@ async function copyNumberToClipboard() {
 
 <template>
   <p>{{ msg }}</p>
+  <v-alert
+    text="Please do not enter any spaces in front of the first line and each method must end up with (). Otherwise, you would obtain incorrect answers."
+    type="warning"
+    variant="tonal"
+  ></v-alert>
+  <br/>
   <v-textarea
-    label="Enter content here"
+    label="Enter methods here:"
     auto-grow
     variant="outlined"
     v-model="methodText"
     clearable
     clear-icon="mdi-close-circle"
   ></v-textarea>
-
   <div v-if="leadingSpacesErrorMsg" class="error-style">
     {{ leadingSpacesErrorMsg }}
   </div>
