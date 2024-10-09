@@ -31,6 +31,9 @@ jobs:
 
     - name: Execute Unit tests
       run: npm run test
+
+    - name: Execute Unit tests coverage
+      run: npm run coverage
       
     - name: Configure git for deployment
       run: |
