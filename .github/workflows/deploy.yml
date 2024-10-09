@@ -29,9 +29,6 @@ jobs:
     - name: Build the Vue.js project
       run: npm run build
 
-    - name: Execute Unit tests
-      run: npm run test
-
     - name: Execute Unit tests coverage
       run: npm run coverage
       
