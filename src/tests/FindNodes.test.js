@@ -1,9 +1,20 @@
+// @vitest-environment jsdom
 import { mount } from "@vue/test-utils";
 import { describe, it, expect } from "vitest";
 import FindNodes from "@/components/FindNodes.vue";
 import fs from 'fs'
 import path from 'path'
 
+
+// path.resolve(__dirname, '../assets/data.txt') is used to genereate an absolute path to a file or directory
+
+// --dirname is a global variable in Node.js that represents the absolute path of the directory containning the current file
+
+// ../assets/data.txt is a relative path, which indicates you move up one directory
+
+// then go into assests folder, then reference the data.txt file
+
+// path.resolve() combines these path segments and returns the absolute path to data.txt
 const fileContent = fs.readFileSync(path.resolve(__dirname, '../assets/data.txt'), 'utf8')
 
 let wrapper;
