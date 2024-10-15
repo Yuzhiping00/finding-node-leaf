@@ -27,7 +27,7 @@ describe('Hardcoded Input Methods', () =>{
         wrapper.vm.methodText = "    This is no leading space string"
         wrapper.vm.highestCallerCount = 0
         expect(wrapper.vm.calculateNodeLeaf()).toBe(0)
-        expect(wrapper.text()).toContain("Number of node leaf: 0")
+        expect(wrapper.text()).toContain("Number of unique node leaf: 0")
         expect(wrapper.vm.leadingSpacesErrorMsg).toContain("Please remove the leading spaces from the first line.")
     })
 
