@@ -133,7 +133,7 @@ async function copyNumberToClipboard() {
         class="margin-customized"
         v-if="highestCallerCount >= 0 && leadingSpacesErrorMsg === null"
       >
-        Number of node leaf:
+        Number of unique node leaf:
         <span class="number-color">{{ highestCallerCount }}</span>
       </div>
     </div>
