@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from "vue";
+import {ref, watch } from "vue";
 let methodText = ref(null);
 let highestCallerCount = ref(0);
 let leadingSpacesErrorMsg = ref(null);
@@ -102,6 +102,7 @@ async function copyNumberToClipboard() {
     console.error("Failed to copy test: ", err);
   }
 }
+
 </script>
 
 <template>
@@ -111,15 +112,8 @@ async function copyNumberToClipboard() {
     type="warning"
     variant="tonal"
   ></v-alert>
-  <br/>
-  <v-textarea
-    label="Enter methods here:"
-    auto-grow
-    variant="outlined"
-    v-model="methodText"
-    clearable
-    clear-icon="mdi-close-circle"
-  ></v-textarea>
+  <br />
+
   <div v-if="leadingSpacesErrorMsg" class="error-style">
     {{ leadingSpacesErrorMsg }}
   </div>
@@ -153,6 +147,16 @@ async function copyNumberToClipboard() {
       </v-tooltip>
     </div>
   </div>
+
+  <v-textarea
+    label="Enter methods here:"
+    rows="28"
+    columns="30"
+    variant="outlined"
+    v-model="methodText"
+    clearable
+    clear-icon="mdi-close-circle"
+  ></v-textarea>
 </template>
 
 <style scoped>
