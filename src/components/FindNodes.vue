@@ -92,6 +92,7 @@ watch(methodText, (newContent) => {
 
 async function copyNumberToClipboard() {
   try {
+    console.log("value = ",highestCallerCount.value)
     await navigator.clipboard.writeText(highestCallerCount.value);
     tooltipText.value = "Copied";
     setTimeout(() => {
