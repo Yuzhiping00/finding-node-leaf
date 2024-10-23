@@ -94,7 +94,6 @@ async function copyNumberToClipboard() {
   try {
     await navigator.clipboard.writeText(highestCallerCount.value);
     tooltipText.value = "Copied";
-    //reset tooltip text after a shor delay(such as 2 seconds)
     setTimeout(() => {
       tooltipText.value = "Click to copy number";
     }, 5000);
